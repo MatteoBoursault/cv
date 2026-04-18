@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matteo Boursault — CV</title>
+  <style>
+    /* ============================================================
+       FONTS
+    ============================================================ */
+    @font-face {
+      font-family: 'CommitMono Nerd Font';
+      src: local('CommitMono Nerd Font'), local('CommitMonoNerdFont');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'CommitMono Nerd Font';
+      src: local('CommitMono Nerd Font Bold'), local('CommitMonoNerdFont-Bold');
+      font-weight: bold;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Terminess Nerd Font';
+      src: local('Terminess Nerd Font'), local('TerminessNerdFont'), local('Terminus (TTF)'), local('Terminus');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* ============================================================
+       SOLARIZED DARK PALETTE (défaut)
+    ============================================================ */
+    :root {
+      /* fond / texte — dark */
+      --base03:  #002b36;
+      --base02:  #073642;
+      --base01:  #586e75;
+      --base00:  #657b83;
+      --base0:   #839496;
+      --base1:   #93a1a1;
+
+      /* accents communs aux deux thèmes */
+      --yellow:  #b58900;
+      --orange:  #cb4b16;
+      --red:     #dc322f;
+      --magenta: #d33682;
+      --violet:  #6c71c4;
+      --blue:    #268bd2;
+      --cyan:    #2aa198;
+      --green:   #859900;
+
+      --font-main: 'CommitMono Nerd Font', 'Courier New', monospace;
+      --font-tech: 'Terminess Nerd Font', 'Courier New', monospace;
+
+      --sidebar-width: 280px;
+      --radius: 4px;
+    }
+
+    /* ============================================================
+       SOLARIZED LIGHT PALETTE
+    ============================================================ */
+    html.light {
+      --base03:  #fdf6e3;
+      --base02:  #eee8d5;
+      --base01:  #93a1a1;
+      --base00:  #839496;
+      --base0:   #657b83;
+      --base1:   #586e75;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 15px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--base03);
+      color: var(--base0);
+      font-family: var(--font-main);
+      line-height: 1.65;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--cyan);
+      text-decoration: underline;
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .cv-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      min-height: 100vh;
+    }
+
+    /* ============================================================
+       SIDEBAR
+    ============================================================ */
+    .sidebar {
+      background-color: var(--base02);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      border-right: 1px solid var(--base01);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* Photo placeholder */
+    .photo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .photo-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: var(--base03);
+      border: 2px dashed var(--base01);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--base01);
+      text-align: center;
+      gap: 0.4rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .photo-placeholder .photo-icon {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .photo-placeholder .photo-label {
+      font-size: 0.62rem;
+      color: var(--base01);
+      padding: 0 0.3rem;
+    }
+
+    /* Name & title */
+    .sidebar-identity {
+      text-align: center;
+    }
+
+    .sidebar-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--base1);
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+    }
+
+    .sidebar-title {
+      font-size: 0.75rem;
+      color: var(--cyan);
+      margin-top: 0.35rem;
+      line-height: 1.4;
+    }
+
+    /* Sidebar sections */
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .sidebar-section-title {
+      font-size: 0.68rem;
+      font-weight: bold;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-bottom: 1px solid var(--base01);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.1rem;
+    }
+
+    /* Contact */
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.76rem;
+      color: var(--base0);
+      line-height: 1.4;
+    }
+
+    .contact-list .icon {
+      color: var(--blue);
+      flex-shrink: 0;
+      width: 1rem;
+      text-align: center;
+      margin-top: 0.05em;
+    }
+
+    /* Social links */
+    .social-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .social-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.76rem;
+    }
+
+    .social-list .icon {
+      color: var(--violet);
+      flex-shrink: 0;
+      width: 1rem;
+      text-align: center;
+    }
+
+    .social-list .placeholder-link {
+      color: var(--base01);
+      font-style: italic;
+      font-size: 0.7rem;
+    }
+
+    /* Skills */
+    .skills-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .skills-list li {
+      font-size: 0.76rem;
+      color: var(--base0);
+      padding-left: 0.85rem;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .skills-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+    }
+
+    /* Interests */
+    .interests-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .interests-list li {
+      font-size: 0.76rem;
+      color: var(--base0);
+      padding-left: 0.85rem;
+      position: relative;
+    }
+
+    .interests-list li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-size: 0.45rem;
+      top: 0.4em;
+    }
+
+    /* ============================================================
+       MAIN CONTENT
+    ============================================================ */
+    .main-content {
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Section */
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .section-title {
+      font-size: 0.68rem;
+      font-weight: bold;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border-bottom: 1px solid var(--base01);
+      padding-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 0.8em;
+      background: var(--blue);
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 0.86rem;
+      color: var(--base1);
+      line-height: 1.8;
+      background-color: var(--base02);
+      border-left: 3px solid var(--cyan);
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    /* Cards */
+    .card {
+      background-color: var(--base02);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
+      border-left: 3px solid var(--blue);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .card.education {
+      border-left-color: var(--violet);
+    }
+
+    .card-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .card-title {
+      font-size: 0.92rem;
+      font-weight: bold;
+      color: var(--base1);
+    }
+
+    .card-org {
+      font-size: 0.84rem;
+      color: var(--blue);
+      margin-top: 0.1rem;
+    }
+
+    .card-location {
+      font-size: 0.76rem;
+      color: var(--base01);
+    }
+
+    .card-date {
+      font-size: 0.7rem;
+      color: var(--base01);
+      white-space: nowrap;
+      background: var(--base03);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+
+    .card-body {
+      font-size: 0.8rem;
+      color: var(--base0);
+      line-height: 1.75;
+    }
+
+    .card-body ul {
+      padding-left: 1.2rem;
+      margin-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .card-body ul li::marker {
+      color: var(--cyan);
+    }
+
+    .card-diploma {
+      font-size: 0.86rem;
+      color: var(--base1);
+      font-weight: bold;
+    }
+
+    /* Tech badges */
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.2rem;
+    }
+
+    .badge {
+      font-family: var(--font-tech);
+      font-size: 0.7rem;
+      color: var(--yellow);
+      background-color: var(--base03);
+      border: 1px solid var(--yellow);
+      border-radius: 2px;
+      padding: 0.08rem 0.42rem;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .badge.misc {
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    /* About */
+    .about-text {
+      font-size: 0.8rem;
+      color: var(--base0);
+      line-height: 1.8;
+    }
+
+    .about-text p + p {
+      margin-top: 0.65rem;
+    }
+
+    .about-text ul {
+      padding-left: 1.2rem;
+      margin: 0.45rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .about-text ul li::marker {
+      color: var(--green);
+    }
+
+    .tech {
+      font-family: var(--font-tech);
+      color: var(--yellow);
+    }
+
+    /* ============================================================
+       RESPONSIVE — TABLET (768–900px)
+    ============================================================ */
+    @media (min-width: 768px) and (max-width: 900px) {
+      :root {
+        --sidebar-width: 230px;
+      }
+      html { font-size: 14px; }
+      .main-content { padding: 2rem 1.5rem; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE (< 768px)
+    ============================================================ */
+    @media (max-width: 767px) {
+      .cv-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--base01);
+        padding: 1.75rem 1.25rem;
+        gap: 1.5rem;
+      }
+
+      .photo-wrapper {
+        flex-direction: row;
+        align-items: center;
+        gap: 1.2rem;
+      }
+
+      .photo-placeholder {
+        flex-shrink: 0;
+      }
+
+      .sidebar-identity {
+        text-align: left;
+      }
+
+      .main-content {
+        padding: 1.75rem 1.1rem;
+        gap: 2rem;
+      }
+
+      .card {
+        padding: 0.9rem 1rem;
+      }
+    }
+
+    /* ============================================================
+       THEME TOGGLE BUTTON
+    ============================================================ */
+    #theme-toggle {
+      position: fixed;
+      top: 1.1rem;
+      right: 1.1rem;
+      z-index: 100;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--base01);
+      background-color: var(--base02);
+      color: var(--yellow);
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+      border-color: var(--yellow);
+    }
+
+    html.light #theme-toggle {
+      color: var(--blue);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    html.light #theme-toggle:hover {
+      border-color: var(--blue);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ============================================================
+       PRINT
+    ============================================================ */
+    @media print {
+      :root { --sidebar-width: 220px; }
+      body { background: #fff; color: #000; }
+      .cv-wrapper { max-width: 100%; }
+      .sidebar { background: #f0f0f0; border-right: 1px solid #bbb; }
+      .sidebar-name, .sidebar-title, .sidebar-section-title,
+      .section-title, .card-title, .card-org { color: #000 !important; }
+      .badge { border-color: #555; color: #333; background: transparent; }
+    }
+  </style>
+</head>
+<body>
+
+<button id="theme-toggle" title="Changer de thème" aria-label="Changer de thème">&#9728;</button>
+
+<div class="cv-wrapper">
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside class="sidebar">
+
+    <!-- Photo -->
+    <div class="photo-wrapper">
+      <div class="photo-placeholder">
+        <!--
+          <img src="photo.jpg" alt="Matteo Boursault" />
+        -->
+        <span class="photo-icon">&#xe611;</span>
+        <span class="photo-label">Photo à ajouter</span>
+      </div>
+    </div>
+
+    <!-- Identité -->
+    <div class="sidebar-identity">
+      <div class="sidebar-name">Matteo Boursault</div>
+      <div class="sidebar-title">Ingénieur en développement logiciel</div>
+    </div>
+
+    <!-- Contact -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Contact</div>
+      <ul class="contact-list">
+        <li>
+          <span class="icon">&#x2605;</span>
+          <span>3 avril 2000</span>
+        </li>
+        <li>
+          <span class="icon">&#x2302;</span>
+          <span>Rezé, France</span>
+        </li>
+        <li>
+          <span class="icon">&#x260e;</span>
+          <span>+33 6 22 76 25 14</span>
+        </li>
+        <li>
+          <span class="icon">&#x2709;</span>
+          <a href="mailto:matteo.boursault.pro@gmail.com">matteo.boursault.pro@gmail.com</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Liens sociaux -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Liens</div>
+      <ul class="social-list">
+        <li>
+          <span class="icon">&#x2767;</span>
+          <span class="placeholder-link">github.com/MatteoBoursault</span>
+        </li>
+        <li>
+          <span class="icon">&#x25a0;</span>
+          <!-- Remplacez par votre URL LinkedIn -->
+          <span class="placeholder-link">linkedin.com/in/mattéo-boursault</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Autres compétences -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Autres compétences</div>
+      <ul class="skills-list">
+        <li>Machine Learning</li>
+        <li>Gestion de bases de données</li>
+        <li>Système d'information décisionnelle</li>
+        <li>Analyse de données</li>
+        <li>Protocoles Réseaux</li>
+        <li>Méthode Agile <span class="tech">(Jira)</span></li>
+        <li>Diagrammes UML <span class="tech">(PlantUML)</span></li>
+      </ul>
+    </div>
+
+    <!-- Centres d'intérêts -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Centres d'intérêts</div>
+      <ul class="interests-list">
+        <li>Escalade</li>
+        <li>Échecs</li>
+        <li>Pêche</li>
+        <li>Randonnée</li>
+      </ul>
+    </div>
+
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main class="main-content">
+
+    <!-- Résumé -->
+    <section class="section">
+      <div class="summary-text">
+        Ingénieur en développement logiciel, je suis à la recherche d'opportunités stimulantes
+        dans le domaine du développement logiciel <span class="tech">C++</span>/<span class="tech">Rust</span>,
+        prêt à mettre mes compétences techniques au service de projets innovants.
+      </div>
+    </section>
+
+    <!-- Expériences -->
+    <section class="section">
+      <h2 class="section-title">Expériences</h2>
+
+      <!-- Sirehna -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Développeur logiciel embarqué</div>
+            <div class="card-org">Sirehna &mdash; <span class="card-location">Nantes</span></div>
+          </div>
+          <div class="card-date">01/2026 – présent</div>
+        </div>
+        <div class="card-body">
+          Développement logiciel <span class="tech">C++</span> embarqué au sein d'une équipe agile.
+        </div>
+        <div class="tech-badges">
+          <span class="badge">C++</span>
+          <span class="badge">CMake</span>
+          <span class="badge">gdb</span>
+          <span class="badge">Podman</span>
+          <span class="badge">GitLab</span>
+          <span class="badge">FastDDS</span>
+          <span class="badge">Harbor</span>
+          <span class="badge">Nexus</span>
+          <span class="badge misc">Linux embarqué</span>
+          <span class="badge misc">Temps réel</span>
+          <span class="badge misc">Micro-services</span>
+        </div>
+      </div>
+
+      <!-- Thales -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Développeur logiciel C++</div>
+            <div class="card-org">Thales &mdash; <span class="card-location">Cholet</span></div>
+          </div>
+          <div class="card-date">06/2024 – 12/2025</div>
+        </div>
+        <div class="card-body">
+          <p>
+            Développement d'un logiciel radio embarqué temps réel en <span class="tech">C++</span>
+            pour le routage de messages entre briques logicielles.
+            Au sein d'une équipe agile de taille moyenne, participation à l'ensemble du processus de développement :
+          </p>
+          <ul>
+            <li>Développement logiciel <span class="tech">C++</span>.</li>
+            <li>Mise en place de la chaîne de compilation (<span class="tech">CMake</span>).</li>
+            <li>
+              Création d'un pipeline d'intégration continue via <span class="tech">Jenkins</span>
+              avec jobs containerisés (<span class="tech">Docker</span>) :
+              campagnes de tests en <span class="tech">Python</span>,
+              compilation native/cible, couverture de code (<span class="tech">Cobertura</span>), job de livraison.
+            </li>
+            <li>Force de proposition sur les choix architecturaux.</li>
+            <li>Interfaçage avec les différentes briques logicielles de la solution.</li>
+            <li>Développement de tests d'intégration en <span class="tech">Python</span> et tests manuels sur cible.</li>
+          </ul>
+        </div>
+        <div class="tech-badges">
+          <span class="badge">C++</span>
+          <span class="badge">CMake</span>
+          <span class="badge">gdb</span>
+          <span class="badge">Cobertura</span>
+          <span class="badge">Docker</span>
+          <span class="badge">Jenkins</span>
+          <span class="badge">Groovy</span>
+          <span class="badge">Python</span>
+          <span class="badge">WebSocket</span>
+          <span class="badge">Protobuf</span>
+          <span class="badge">Bitbucket</span>
+          <span class="badge">Bash</span>
+          <span class="badge misc">Temps réel</span>
+          <span class="badge misc">Linux embarqué</span>
+          <span class="badge misc">Protocole radio</span>
+        </div>
+      </div>
+
+      <!-- Aquilae -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Stagiaire — Computer Vision &amp; IA</div>
+            <div class="card-org">Aquilae &mdash; <span class="card-location">Troyes</span></div>
+          </div>
+          <div class="card-date">2023 — 6 mois</div>
+        </div>
+        <div class="card-body">
+          Détection de dégradation de la qualité d'image liée à la présence d'anomalies
+          sur des vidéos, en utilisant des méthodes de computer vision et d'IA.
+        </div>
+        <div class="tech-badges">
+          <span class="badge">C++</span>
+          <span class="badge">CMake</span>
+          <span class="badge">OpenCV</span>
+          <span class="badge">PyTorch</span>
+          <span class="badge">ONNX Runtime</span>
+          <span class="badge">Python</span>
+          <span class="badge">Docker</span>
+          <span class="badge misc">Computer Vision</span>
+          <span class="badge misc">Temps réel</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Formation -->
+    <section class="section">
+      <h2 class="section-title">Formation</h2>
+
+      <div class="card education">
+        <div class="card-header">
+          <div>
+            <div class="card-diploma">Diplôme d'ingénieur — Informatique</div>
+            <div class="card-org">Polytech Nantes</div>
+          </div>
+          <div class="card-date">2020 – 2023</div>
+        </div>
+      </div>
+
+      <div class="card education">
+        <div class="card-header">
+          <div>
+            <div class="card-diploma">DUT Statistique et Informatique Décisionnelle</div>
+            <div class="card-org">IUT de Vannes</div>
+          </div>
+          <div class="card-date">2018 – 2020</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- À propos -->
+    <section class="section">
+      <h2 class="section-title">À propos</h2>
+      <div class="about-text">
+        <p>
+          En plus des compétences acquises durant mes expériences professionnelles,
+          je consacre une partie de mon temps libre à la veille technologique sur des sujets qui m'intéressent :
+        </p>
+        <ul>
+          <li>L'IA et notamment son utilisation au sein de systèmes agentiques pour la génération de code.</li>
+          <li>Les nouveaux outils et langages de programmation (je me forme en ce moment sur <span class="tech">Rust</span>).</li>
+          <li><span class="tech">Linux</span> (que j'utilise au quotidien) et l'open source de manière générale.</li>
+        </ul>
+        <p>
+          Curieux et désireux de me perfectionner, je cherche une entreprise aussi exigeante que je le suis dans mon travail.
+          Je projette de devenir architecte logiciel et souhaite, à moyen terme, me voir confier des responsabilités
+          liées à l'architecture afin de développer mes compétences dans ce domaine.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+
+<script>
+  (function () {
+    var html = document.documentElement;
+    var btn  = document.getElementById('theme-toggle');
+
+    /* ☀ = soleil (mode dark actif → cliquer passera en light)
+       ☽ = lune  (mode light actif → cliquer passera en dark)  */
+    var SUN  = '\u2600'; // ☀
+    var MOON = '\u263D'; // ☽
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        html.classList.add('light');
+        btn.textContent = MOON;
+        btn.setAttribute('title', 'Passer en mode sombre');
+      } else {
+        html.classList.remove('light');
+        btn.textContent = SUN;
+        btn.setAttribute('title', 'Passer en mode clair');
+      }
+    }
+
+    /* Restaurer la préférence sauvegardée, ou utiliser dark par défaut */
+    var saved = localStorage.getItem('cv-theme') || 'dark';
+    applyTheme(saved);
+
+    btn.addEventListener('click', function () {
+      var next = html.classList.contains('light') ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem('cv-theme', next);
+    });
+  })();
+</script>
+
+</body>
+</html>
